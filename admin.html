@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Horaires</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">mes<em>horaires</em> <span>/ Admin</span></div>
+  <a class="header-link" href="index.html">← Tablette</a>
+</header>
+
+<main>
+
+  <!-- Panel employés -->
+  <div id="panel-emps" class="panel active">
+    <div class="toolbar">
+      <input class="search" type="text" placeholder="Rechercher…" oninput="afficherTableauEmployes(this.value)">
+      <div class="flex-gap">
+        <button class="btn-sm btn-primary" onclick="ouvrirFormulaireEmploye()">+ Ajouter</button>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Nom</th><th>Prénom</th><th>Poste</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="emp-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- Fenêtre détails employé -->
+<div class="overlay" id="details-overlay">
+  <div class="modal">
+    <button class="modal-x" onclick="fermerDetailsEmploye()">✕</button>
+    <div class="modal-title">Détails employé</div>
+    <div id="details-content"></div>
+    <div class="modal-actions">
+      <button class="btn btn-historique" style="margin-top:10px;" onclick="ouvrirHistorique()">Voir mes horaires</button>
+    <!-- Historique de l'employé -->
+    <div id="historique-overlay" class="overlay" style="display:none;">
+        <div class="modal">
+            <button class="modal-x" onclick="fermerHistorique()">✕</button>
+            <div class="modal-title">Historique de l'employé</div>
+            <table>
+            <thead>
+                <tr>
+                <th>Date</th>
+                <th>Début</th>
+                <th>Fin</th>
+                <th>Durée (h)</th>
+                <th>Repas</th>
+                </tr>
+            </thead>
+            <tbody id="historique-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+</main>
+
+<!-- Fenêtre ajout / modification d'un employé -->
+<div class="overlay" id="emp-overlay">
+  <div class="modal">
+    <button class="modal-x" onclick="fermerFormulaireEmploye()">✕</button>
+    <div class="modal-title" id="emp-modal-titre">Nouvel employé</div>
+    <div class="form-group">
+      <label class="form-label">Prénom</label>
+      <input class="form-input" id="fe-prenom" type="text" placeholder="Prénom">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Nom</label>
+      <input class="form-input" id="fe-nom" type="text" placeholder="Nom">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Poste</label>
+      <input class="form-input" id="fe-poste" type="text" placeholder="Ex : Cuisinier, Manager…">
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-cancel" onclick="fermerFormulaireEmploye()">Annuler</button>
+      <button class="btn btn-save" onclick="sauvegarderEmploye()">Enregistrer</button>
+  
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
